@@ -1,8 +1,8 @@
 # cli-tools
 
 ### Usage
+Copy the file to desktop. CD to that directory and run...
 ``` bash
-curl --remote-name https://raw.githubusercontent.com/thoughtbot/laptop/master/mac
-less mac
-bash mac 2>&1 | tee ~/laptop.log
+less mac-setup.sh
+bash mac-setup.sh 2>&1 | tee ~/laptop.log
 ```
