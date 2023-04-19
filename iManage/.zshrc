@@ -110,8 +110,8 @@ export TENANT_ADMIN_URL=https://frontend.service.imanagecloud.com
 export CLIENT_SERVER_URL=https://frontend.service.imanagecloud.com
 eval "$(jenv init -)"
 
-export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=stratusstoragepoc;AccountKey=03y+b4M9jDk70xxv74Q4mE67dH3YxcO/Qqsuu81xUDHX0iR3I96ygdwbARsJTCx8HlCDUXAJ320yjYpOO6ccHw==;EndpointSuffix=core.windows.net"
-export AZURE_STORAGE_CONNECTION_STRING2="DefaultEndpointsProtocol=https;AccountName=imanagecloudperftest;AccountKey=jvWT0vqk3TpYLN4w0mS1Qh78uD0bHODSyWb0sYcyujM+OvmQ0gMRUuwst9aLuj46KiDlKx0OgDUd2Hhy66xxvg==;EndpointSuffix=core.windows.net"
+export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=stratusstoragepoc;AccountKey=???;EndpointSuffix=core.windows.net"
+export AZURE_STORAGE_CONNECTION_STRING2="DefaultEndpointsProtocol=https;AccountName=imanagecloudperftest;AccountKey=???;EndpointSuffix=core.windows.net"
 
 # FORMATTING
 alias grep='GREP_COLOR="0;37;41" LANG=C grep --color=auto'
@@ -141,7 +141,7 @@ alias mci="mvn clean install"
 
 ## GIT SHORTCUTS
 export GITHUB_USERNAME=cchoy96
-export GITHUB_API_KEY=084332689cf04eab9b7dbdd48845dda856a45a5f
+export GITHUB_API_KEY=???
 alias pullall='cwd=`pwd`; for repo in `ls`; do echo -e "${BLUE}${repo}${NOCOLOR}"; cd $repo; git pull; cd $cwd; done; touch last_pullall'
 alias cloneall='for i in `seq 1 4`; do curl -s https://$GITHUB_USERNAME:$GITHUB_API_KEY@api.github.com/orgs/imanagedev/repos?per_page=200\&page=$i | jq .[].ssh_url | xargs -n 1 git clone; done'
 alias git_project_version="git describe --abbrev=0"
