@@ -16,17 +16,31 @@ append_to_zshrc() {
   local skip_new_line="$2"
 
   if [[ -w "$HOME/.zshrc.local" ]]; then
-    zshrc="$HOME/.zshrc.local"
+    f="$HOME/.zshrc.local"
   else
-    zshrc="$HOME/.zshrc"
+    f="$HOME/.zshrc"
   fi
 
-  if ! grep -Fqs "$text" "$zshrc"; then
+  if ! grep -Fqs "$text" "$f"; then
     if (( skip_new_line )); then
-      printf "%s\n" "$text" >> "$zshrc"
+      printf "%s\n" "$text" >> "$f"
     else
-      printf "\n%s\n" "$text" >> "$zshrc"
+      printf "\n%s\n" "$text" >> "$f"
     fi
+  fi
+}
+
+append_to_zprofile() {
+  local text="$1" zprofile
+
+  if [[ -w "$HOME/.zprofile.local" ]]; then
+    f="$HOME/.zprofile.local"
+  else
+    f="$HOME/.zprofile"
+  fi
+
+  if ! grep -Fqs "$text" "$zprofile"; then
+      printf "%s\n" "$text" >> "$f"
   fi
 }
 
@@ -95,8 +109,11 @@ if ! command -v brew >/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     append_to_zshrc '# recommended by brew doctor'
-    append_to_zshrc 'export PATH="/usr/local/bin:$PATH"' 1
+    append_to_zshrc 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+    append_to_zprofile '# recommended by brew doctor'
+    append_to_zprofile 'eval "$(/opt/homebrew/bin/brew shellenv)"'
     export PATH="/usr/local/bin:$PATH"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   fancy_echo "Homebrew already installed. Skipping ..."
 fi
@@ -107,12 +124,10 @@ brew doctor
 
 # INSTALL DEVELOPER THINGS
 brew_install_or_upgrade 'git'
-brew_install_or_upgrade 'postgres'
-fancy_echo "Restarting Postgres ..."
-  brew_launchctl_restart postgresql
+brew_install_or_upgrade 'python'
 brew_install_or_upgrade 'vim'
-brew_instal_or_upgrade 'iterm2'
-brew_instal_or_upgrade 'visual-studio-code'
+brew_install_or_upgrade 'iterm2'
+brew_install_or_upgrade 'visual-studio-code'
 
 # INSTALL COMMON LAPTOP IMPROVEMENTS
 brew_install_or_upgrade 'spotify'
